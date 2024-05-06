@@ -1,0 +1,65 @@
+function merge(arr, l, m, r):
+    n1 = m - l + 1
+    n2 = r - m
+
+    L = array of size n1
+    R = array of size n2
+
+    for i from 0 to n1-1:
+        L[i] = arr[l + i]
+
+    for j from 0 to n2-1:
+        R[j] = arr[m + 1 + j]
+
+    i = 0
+    j = 0
+    k = l
+
+    while i < n1 and j < n2:
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i = i + 1
+        else:
+            arr[k] = R[j]
+            j = j + 1
+        k = k + 1
+
+    while i < n1:
+        arr[k] = L[i]
+        i = i + 1
+        k = k + 1
+
+    while j < n2:
+        arr[k] = R[j]
+        j = j + 1
+        k = k + 1
+
+function mergeSort(arr, l, r):
+    if l < r:
+        m = l + (r - l) // 2
+        mergeSort(arr, l, m)
+        mergeSort(arr, m + 1, r)
+        merge(arr, l, m, r)
+
+arr = [12, 11, 13, 5, 6, 7]
+
+function partition_array(arr):
+    n = length(arr)
+    mergeSort(arr, 0, n - 1)
+    n_2 = n / 2
+    right_array = arr[n_2:n]
+    left_array = arr[0:n_2]
+
+    sum_left = 0
+    sum_right = 0
+    for i from 0 to length(left_array) - 1:
+        sum_left = sum_left + left_array[i]
+
+    for i from 0 to length(right_array) - 1:
+        sum_right = sum_right + right_array[i]
+
+    return sum_left, sum_right, arr, left_array, right_array
+
+
+sum_left, sum_right, arr, left_array, right_array = partition_array(arr)
+

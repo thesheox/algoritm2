@@ -1,0 +1,20 @@
+function search_recursive(matrix, target, row, col):
+    if row >= length(matrix) or col < 0:
+        return False
+
+    if matrix[row][col] == target:
+        return True
+    elif matrix[row][col] < target:
+        return search_recursive(matrix, target, row + 1, col)
+    else:
+        return search_recursive(matrix, target, row, col - 1)
+
+function search_in_sorted_matrix(matrix, target):
+    if empty(matrix):
+        return False
+
+    rows = length(matrix)
+    cols = length(matrix[0])
+
+    return search_recursive(matrix, target, 0, cols - 1)
+
